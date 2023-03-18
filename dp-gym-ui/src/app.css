@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	/* Safe zone variables */
+	--sat: env(safe-area-inset-top, 0);
+	--sar: env(safe-area-inset-right, 0);
+	--sab: env(safe-area-inset-bottom, 0);
+	--sal: env(safe-area-inset-left, 0);
+}
+
+html {
+	@apply h-full;
+	@apply w-full;
+	@apply overflow-hidden;
+}
+
+body {
+	@apply h-full;
+	@apply w-full;
+	@apply flex;
+	@apply flex-col;
+	@apply bg-light-surface;
+	@apply dark:bg-dark-surface;
+	@apply overflow-hidden;
+	overscroll-behavior: none;
+}
+
+* {
+	-webkit-backface-visibility: hidden;
+	-webkit-tap-highlight-color: transparent;
+}
