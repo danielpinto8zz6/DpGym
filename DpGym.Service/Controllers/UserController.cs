@@ -1,4 +1,5 @@
 using DpGym.Application.Services;
+using DpGym.Contracts.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DpGym.Controllers;
@@ -16,15 +17,10 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    [HttpPost]
+    public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationDto userRegistration)
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+        var userResult = await _userService.RegisterAsync(userRegistration);
+        return !userResult.Succeeded ? BadRequest(userResult) : StatusCode(201);
     }
 }

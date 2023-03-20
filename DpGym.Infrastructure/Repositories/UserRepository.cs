@@ -1,6 +1,7 @@
 using DpGym.Domain;
 using DpGym.Infrastructure.Data;
 using DpGym.Infrastructure.Exceptions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DpGym.Infrastructure.Repositories;
@@ -9,11 +10,11 @@ public class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _dbContext;
 
-    public UserRepository(ApplicationDbContext dbContext)
+    public UserRepository(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
     {
         _dbContext = dbContext;
     }
-
+    
     public async Task<ApplicationUser> CreateAsync(ApplicationUser user)
     {
        var result = await _dbContext.Users.AddAsync(user);

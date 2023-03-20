@@ -1,11 +1,12 @@
-using DpGym.Contracts.Models;
+using DpGym.Contracts.Dtos;
+using Microsoft.AspNetCore.Identity;
 
 namespace DpGym.Application.Services;
 
 public interface IUserService
 {
-    Task CreateAsync(User user);
-    Task<User> GetByIdAsync(string id);
+    Task<IdentityResult> RegisterAsync(UserRegistrationDto user);
+    Task<UserDto> GetByIdAsync(string id);
     Task DeleteByIdAsync(string id);
-    Task UpdateAsync(User user);
+    Task UpdateAsync(UserDto userDto);
 }
